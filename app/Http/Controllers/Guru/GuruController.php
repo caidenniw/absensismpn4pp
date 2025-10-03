@@ -78,12 +78,8 @@ class GuruController extends Controller
         $data = $request->only('name', 'email');
 
         if ($request->hasFile('profile_picture')) {
-            $directory = public_path('profile_pictures');
-            if (!File::exists($directory)) {
-                File::makeDirectory($directory, 0755, true);
-            }
             $filename = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
-            $request->file('profile_picture')->move($directory, $filename);
+            $request->file('profile_picture')->move(public_path('profile_pictures'), $filename);
             $data['profile_picture'] = 'profile_pictures/' . $filename;
         }
 
