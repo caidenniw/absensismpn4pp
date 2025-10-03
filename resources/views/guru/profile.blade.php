@@ -33,7 +33,7 @@
                         <label for="profile_picture" class="form-label">Foto Profil</label>
                         <input class="form-control" type="file" id="profile_picture" name="profile_picture">
                         @if(auth()->user()->profile_picture)
-                            <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Foto Profil" class="img-thumbnail mt-2" width="150">
+                            <img src="{{ asset(auth()->user()->profile_picture) }}" alt="Foto Profil" class="img-thumbnail mt-2" width="150">
                         @endif
                     </div>
 

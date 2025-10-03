@@ -77,8 +77,9 @@ class GuruController extends Controller
         $data = $request->only('name', 'email');
 
         if ($request->hasFile('profile_picture')) {
-            $path = $request->file('profile_picture')->store('profile_pictures', 'public');
-            $data['profile_picture'] = $path;
+            $filename = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
+            $request->file('profile_picture')->move(public_path('profile_pictures'), $filename);
+            $data['profile_picture'] = 'profile_pictures/' . $filename;
         }
 
         $user->update($data);
