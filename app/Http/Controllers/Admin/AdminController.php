@@ -114,7 +114,7 @@ class AdminController extends Controller
 
     public function destroyKelas($id)
     {
-        try {
+try {
             $kelas = Kelas::findOrFail($id);
             $kelas->delete();
             return back()->with('success', 'Kelas berhasil dihapus.');
