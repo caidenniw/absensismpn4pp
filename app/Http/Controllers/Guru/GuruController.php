@@ -31,7 +31,14 @@ class GuruController extends Controller
         $mataPelajaran = MataPelajaran::findOrFail($request->mata_pelajaran_id);
         $siswa = Siswa::where('kelas_id', $request->kelas_id)->get();
 
-        return view('guru.absensi', compact('kelas', 'mataPelajaran', 'siswa'));
+        // Get existing absensi data for today
+        $existingAbsensi = Absensi::where('mata_pelajaran_id', $request->mata_pelajaran_id)
+            ->where('tanggal', now()->toDateString())
+            ->whereIn('siswa_id', $siswa->pluck('id'))
+            ->get()
+            ->keyBy('siswa_id');
+
+        return view('guru.absensi', compact('kelas', 'mataPelajaran', 'siswa', 'existingAbsensi'));
     }
 
     public function storeAbsensi(Request $request)
@@ -42,21 +49,42 @@ class GuruController extends Controller
             'mata_pelajaran_id' => 'required|exists:mata_pelajarans,id',
         ]);
 
+        $updatedCount = 0;
+        $createdCount = 0;
+
         foreach ($request->absensi as $siswaId => $status) {
-            Absensi::updateOrCreate(
-                [
+            $existing = Absensi::where('siswa_id', $siswaId)
+                ->where('tanggal', now()->toDateString())
+                ->where('mata_pelajaran_id', $request->mata_pelajaran_id)
+                ->first();
+
+            if ($existing) {
+                if ($existing->status !== $status) {
+                    $existing->update(['status' => $status]);
+                    $updatedCount++;
+                }
+            } else {
+                Absensi::create([
                     'siswa_id' => $siswaId,
                     'tanggal' => now()->toDateString(),
                     'mata_pelajaran_id' => $request->mata_pelajaran_id,
-                ],
-                [
                     'user_id' => Auth::id(),
                     'status' => $status,
-                ]
-            );
+                ]);
+                $createdCount++;
+            }
         }
 
-        return redirect()->route('guru.dashboard')->with('success', 'Absensi berhasil disimpan.');
+        $message = 'Absensi berhasil disimpan.';
+        if ($updatedCount > 0 && $createdCount > 0) {
+            $message = "Absensi berhasil diperbarui ({$updatedCount} diubah, {$createdCount} baru).";
+        } elseif ($updatedCount > 0) {
+            $message = "Absensi berhasil diperbarui ({$updatedCount} data diubah).";
+        } elseif ($createdCount > 0) {
+            $message = "Absensi berhasil disimpan ({$createdCount} data baru).";
+        }
+
+        return redirect()->route('guru.dashboard')->with('success', $message);
     }
 
     public function showProfile()
