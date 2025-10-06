@@ -1,15 +1,21 @@
-/* General Body and Typography */
+/* =============================
+   GENERAL BODY & TYPOGRAPHY
+============================= */
 body {
     font-family: "Poppins", sans-serif;
     background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
     color: #333;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
-/* School Header */
+/* =============================
+   SCHOOL HEADER SECTION
+============================= */
 .school-header {
     background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
-    color: white;
+    color: #fff;
     padding: 2rem 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -28,28 +34,37 @@ body {
     opacity: 0.9;
 }
 
-.header-icons i {
-    animation: float 3s ease-in-out infinite;
-}
+/* =============================
+   HEADER ICON ANIMATION
+============================= */
+@media (prefers-reduced-motion: no-preference) {
+    .school-header .header-icons i {
+        animation: float 3s ease-in-out infinite;
+        display: inline-block;
+    }
 
-.header-icons i:nth-child(2) {
-    animation-delay: 1s;
-}
-.header-icons i:nth-child(3) {
-    animation-delay: 2s;
+    .school-header .header-icons i:nth-child(2) {
+        animation-delay: 1s;
+    }
+
+    .school-header .header-icons i:nth-child(3) {
+        animation-delay: 2s;
+    }
 }
 
 @keyframes float {
     0%,
     100% {
-        transform: translateY(0px);
+        transform: translateY(0);
     }
     50% {
         transform: translateY(-10px);
     }
 }
 
-/* Navbar Styling */
+/* =============================
+   NAVBAR
+============================= */
 .navbar {
     background-color: #1976d2 !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -60,13 +75,15 @@ body {
     color: #ffffff !important;
 }
 
-/* Card Styling */
+/* =============================
+   CARD STYLING
+============================= */
 .card {
     border: none;
     border-radius: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease-in-out;
-    background: white;
+    background: #fff;
 }
 
 .card:hover {
@@ -82,7 +99,9 @@ body {
     border-top-right-radius: 1rem;
 }
 
-/* Button Styling */
+/* =============================
+   BUTTONS
+============================= */
 .btn-primary {
     background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
     border-color: #4caf50;
@@ -108,7 +127,9 @@ body {
     border-color: #45a049;
 }
 
-/* Form Control Styling */
+/* =============================
+   FORMS
+============================= */
 .form-control,
 .form-select {
     border-radius: 0.5rem;
@@ -122,7 +143,9 @@ body {
     box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
 }
 
-/* Table Styling */
+/* =============================
+   TABLES
+============================= */
 .table {
     border-radius: 0.5rem;
     overflow: hidden;
@@ -139,14 +162,20 @@ body {
     background-color: #f8f9fa;
 }
 
-/* Footer */
-.footer {
-    background: linear-gradient(135deg, #424242 0%, #212121 100%);
-    color: white;
+/* =============================
+   FOOTER
+============================= */
+/* Menghapus konflik dengan .bg-dark Bootstrap */
+footer.footer {
+    background: linear-gradient(135deg, #424242 0%, #212121 100%) !important;
+    color: #fff !important;
     margin-top: auto;
+    padding: 1.5rem 0;
 }
 
-/* Responsive Design */
+/* =============================
+   RESPONSIVE DESIGN
+============================= */
 @media (max-width: 768px) {
     .school-title {
         font-size: 2rem;
@@ -154,7 +183,7 @@ body {
     .school-subtitle {
         font-size: 1rem;
     }
-    .header-icons i {
+    .school-header .header-icons i {
         font-size: 1.5rem;
         margin: 0 0.5rem;
     }
