@@ -1,0 +1,160 @@
+/* =============================
+   GENERAL BODY & TYPOGRAPHY
+============================= */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+  color: #333;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* =============================
+   SCHOOL HEADER
+============================= */
+.school-header {
+  background: linear-gradient(135deg, #2196f3 0%, #21cbf3 100%);
+  color: #fff;
+  padding: 2rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.school-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.school-subtitle {
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 0;
+  opacity: 0.9;
+}
+
+/* =============================
+   HEADER ICON ANIMATION
+============================= */
+@media (prefers-reduced-motion: no-preference) {
+  .school-header .header-icons i {
+    animation: float 3s ease-in-out infinite;
+    display: inline-block;
+  }
+  .school-header .header-icons i:nth-child(2) { animation-delay: 1s; }
+  .school-header .header-icons i:nth-child(3) { animation-delay: 2s; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* =============================
+   NAVBAR
+============================= */
+.navbar {
+  background-color: #1976d2 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.navbar-brand {
+  font-weight: 600;
+  color: #ffffff !important;
+}
+
+/* =============================
+   CARD
+============================= */
+.card {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+  background: #fff;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+.card-header {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: #fff;
+  font-weight: 500;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+/* =============================
+   BUTTONS
+============================= */
+.btn-primary {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  border-color: #4caf50;
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+  border-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+.btn-success {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  border-color: #4caf50;
+  border-radius: 0.5rem;
+}
+.btn-success:hover {
+  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+  border-color: #45a049;
+}
+
+/* =============================
+   FORMS
+============================= */
+.form-control,
+.form-select {
+  border-radius: 0.5rem;
+  border: 2px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+}
+
+/* =============================
+   TABLES
+============================= */
+.table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.table thead th {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: #fff;
+  border: none;
+}
+.table tbody tr:hover { background-color: #f8f9fa; }
+
+/* =============================
+   FOOTER  (paksa menang dari .bg-dark)
+============================= */
+footer.footer {
+  background: linear-gradient(135deg, #424242 0%, #212121 100%) !important;
+  color: #fff !important;
+  margin-top: auto;
+  padding: 1.5rem 0;
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+@media (max-width: 768px) {
+  .school-title { font-size: 2rem; }
+  .school-subtitle { font-size: 1rem; }
+  .school-header .header-icons i { font-size: 1.5rem; margin: 0 0.5rem; }
+}

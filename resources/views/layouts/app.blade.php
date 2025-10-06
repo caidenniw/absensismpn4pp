@@ -14,7 +14,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <!--<link rel="stylesheet" href="{{ asset('css/custom.css') }}">-->
+    <link rel="stylesheet" href="{{ secure_asset('css/custom.v2.css') }}?v={{ time() }}">
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
