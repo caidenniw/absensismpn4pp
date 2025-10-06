@@ -12,7 +12,7 @@
                     <div class="school-logo mb-3">
                         <i class="fas fa-school fa-4x text-primary"></i>
                     </div>
-                    <h2 class="fw-bold text-primary mb-2">Absensi SMPN 4 Padang Panjang</h2>
+                    <h2 class="fw-bold text-primary mb-2">FourPres</h2>
                     <p class="text-muted">Masuk ke Sistem Absensi Digital</p>
                 </div>
 

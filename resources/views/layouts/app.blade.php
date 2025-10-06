@@ -23,7 +23,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-md-6 judul">
-                    <h1 class="school-title"><i class="fas fa-school me-3"></i>Absensi SMPN 4 Padang Panjang</h1>
+                    <h1 class="school-title"><i class="fas fa-school me-3"></i>FourPres</h1>
                     <p class="school-subtitle">Sistem Absensi Digital untuk Pendidikan Berkualitas</p>
                 </div>
                 <div class="col-md-6 text-end">
@@ -106,12 +106,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5><i class="fas fa-school me-2"></i>SMPN 4</h5>
+                    <h5><i class="fas fa-school me-2"></i>SMPN 4 PADANG PANJANG</h5>
                     <p>Sistem Absensi Modern untuk Pendidikan Masa Depan</p>
                 </div>
                 <div class="col-md-6 text-end">
-                    <p>&copy; {{ date('Y') }} SMPN 4. All Rights Reserved.</p>
-                    <p><i class="fas fa-code me-1"></i>Dikembangkan dengan ❤️ untuk Pendidikan</p>
+                    <p>&copy; {{ date('Y') }} SMPN 4 PADANG PANJANG. All Rights Reserved.</p>
+                    <!-- <p><i class="fas fa-code me-1"></i>Dikembangkan dengan ❤️ untuk Pendidikan</p> -->
                 </div>
             </div>
         </div>
