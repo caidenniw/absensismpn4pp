@@ -12,7 +12,7 @@
                     <div class="school-logo mb-3">
                         <i class="fas fa-user-plus fa-4x text-success"></i>
                     </div>
-                    <h2 class="fw-bold text-success mb-2">Bergabung dengan SMPN 4</h2>
+                    <h2 class="fw-bold text-success mb-2">Bergabung dengan SMPN 4 Padang Panjang</h2>
                     <p class="text-muted">Buat akun untuk mengakses sistem absensi digital</p>
                 </div>
 
@@ -35,13 +35,13 @@
                                     <i class="fas fa-id-card"></i>
                                 </span>
                                 <input id="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror"
-                                       name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
-                                       placeholder="Masukkan nama lengkap Anda">
+                                    name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
+                                    placeholder="Masukkan nama lengkap Anda">
                             </div>
                             @error('name')
-                                <div class="invalid-feedback d-block">
-                                    <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
-                                </div>
+                            <div class="invalid-feedback d-block">
+                                <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                            </div>
                             @enderror
                         </div>
 
@@ -54,13 +54,13 @@
                                     <i class="fas fa-at"></i>
                                 </span>
                                 <input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror"
-                                       name="email" value="{{ old('email') }}" required autocomplete="email"
-                                       placeholder="Masukkan email institusi Anda">
+                                    name="email" value="{{ old('email') }}" required autocomplete="email"
+                                    placeholder="Masukkan email Anda">
                             </div>
                             @error('email')
-                                <div class="invalid-feedback d-block">
-                                    <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
-                                </div>
+                            <div class="invalid-feedback d-block">
+                                <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                            </div>
                             @enderror
                         </div>
 
@@ -73,13 +73,13 @@
                                     <i class="fas fa-key"></i>
                                 </span>
                                 <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror"
-                                       name="password" required autocomplete="new-password"
-                                       placeholder="Minimal 8 karakter">
+                                    name="password" required autocomplete="new-password"
+                                    placeholder="Minimal 8 karakter">
                             </div>
                             @error('password')
-                                <div class="invalid-feedback d-block">
-                                    <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
-                                </div>
+                            <div class="invalid-feedback d-block">
+                                <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                            </div>
                             @enderror
                         </div>
 
@@ -92,8 +92,8 @@
                                     <i class="fas fa-check-circle"></i>
                                 </span>
                                 <input id="password_confirmation" type="password" class="form-control form-control-lg"
-                                       name="password_confirmation" required autocomplete="new-password"
-                                       placeholder="Ulangi password">
+                                    name="password_confirmation" required autocomplete="new-password"
+                                    placeholder="Ulangi password">
                             </div>
                         </div>
                     </div>
@@ -147,108 +147,112 @@
 </div>
 
 <style>
-.register-card {
-    background: white;
-    border-radius: 1.5rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    padding: 3rem 2rem;
-    animation: slideInUp 0.6s ease-out;
-}
-
-.school-logo {
-    animation: bounceIn 0.8s ease-out;
-}
-
-.register-form .form-control {
-    border: 2px solid #e9ecef;
-    transition: all 0.3s ease;
-}
-
-.register-form .form-control:focus {
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
-    transform: translateY(-2px);
-}
-
-.register-form .input-group-text {
-    border: 2px solid #e9ecef;
-    border-right: none;
-}
-
-.register-form .form-control:focus + .input-group-text,
-.register-form .input-group-text:focus-within {
-    border-color: #4CAF50;
-}
-
-.btn-success {
-    transition: all 0.3s ease;
-}
-
-.btn-success:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
-}
-
-.password-requirements {
-    background: #f8f9fa;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    border-left: 4px solid #4CAF50;
-}
-
-.benefit-item {
-    padding: 1rem;
-    border-radius: 0.5rem;
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(33, 150, 243, 0.05));
-    transition: transform 0.3s ease;
-}
-
-.benefit-item:hover {
-    transform: scale(1.05);
-}
-
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+    .register-card {
+        background: white;
+        border-radius: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 3rem 2rem;
+        animation: slideInUp 0.6s ease-out;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-@keyframes bounceIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.3);
+    .school-logo {
+        animation: bounceIn 0.8s ease-out;
     }
-    50% {
-        opacity: 1;
+
+    .register-form .form-control {
+        border: 2px solid #e9ecef;
+        transition: all 0.3s ease;
+    }
+
+    .register-form .form-control:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+        transform: translateY(-2px);
+    }
+
+    .register-form .input-group-text {
+        border: 2px solid #e9ecef;
+        border-right: none;
+    }
+
+    .register-form .form-control:focus+.input-group-text,
+    .register-form .input-group-text:focus-within {
+        border-color: #4CAF50;
+    }
+
+    .btn-success {
+        transition: all 0.3s ease;
+    }
+
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+    }
+
+    .password-requirements {
+        background: #f8f9fa;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        border-left: 4px solid #4CAF50;
+    }
+
+    .benefit-item {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(33, 150, 243, 0.05));
+        transition: transform 0.3s ease;
+    }
+
+    .benefit-item:hover {
         transform: scale(1.05);
     }
-    70% {
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
 
-@media (max-width: 768px) {
-    .register-card {
-        padding: 2rem 1.5rem;
-        margin: 1rem;
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
-    .school-logo .fa-4x {
-        font-size: 3rem;
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        70% {
+            transform: scale(0.9);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
 
-    .row .col-md-6 {
-        margin-bottom: 1rem;
+    @media (max-width: 768px) {
+        .register-card {
+            padding: 2rem 1.5rem;
+            margin: 1rem;
+        }
+
+        .school-logo .fa-4x {
+            font-size: 3rem;
+        }
+
+        .row .col-md-6 {
+            margin-bottom: 1rem;
+        }
     }
-}
 </style>
 @endsection

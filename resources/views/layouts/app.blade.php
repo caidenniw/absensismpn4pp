@@ -16,6 +16,7 @@
     <!-- Custom CSS -->
     <!--<link rel="stylesheet" href="{{ asset('css/custom.css') }}">-->
     <link rel="stylesheet" href="{{ secure_asset('css/custom.v2.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.v2.css') }}?v={{ filemtime(public_path('css/custom.v2.css')) }}">
 
 </head>
 
