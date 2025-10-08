@@ -274,7 +274,8 @@
     <!-- Footer -->
     <div class="footer">
         <p>Laporan ini dibuat secara otomatis oleh Sistem Absensi Digital SMPN 4 Padang Panjang</p>
-        <p>Dicetak pada: {{ \Carbon\Carbon::now()->format('d F Y H:i:s') }}</p>
+        <!-- <p>Dicetak pada: {{ \Carbon\Carbon::now()->format('d F Y H:i:s') }}</p>s -->
+        <p>Dicetak pada: {{ now()->tz('Asia/Jakarta')->locale('id')->translatedFormat('d F Y H:i:s') }} WIB</p>
     </div>
 
     <!-- Signature Section -->
