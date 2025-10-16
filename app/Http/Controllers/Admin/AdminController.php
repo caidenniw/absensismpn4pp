@@ -51,7 +51,10 @@ class AdminController extends Controller
 
     public function storeMataPelajaran(Request $request)
     {
-        $request->validate(['nama_pelajaran' => 'required|string|max:255']);
+        $request->validate([
+            'nama_pelajaran' => 'required|string|max:255',
+            'kode' => 'required|string|max:10|unique:mata_pelajarans,kode'
+        ]);
         MataPelajaran::create($request->all());
         return back()->with('success', 'Mata Pelajaran berhasil ditambahkan.');
     }

@@ -14,6 +14,7 @@ class Absensi extends Model
         'mata_pelajaran_id',
         'user_id',
         'tanggal',
+        'jam_ke',
         'status',
     ];
 

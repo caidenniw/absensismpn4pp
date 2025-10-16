@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Absensi - ' . $kelas->nama_kelas . ' - ' . $mataPelajaran->nama_pelajaran)
+@section('title', 'Absensi - ' . $kelas->nama_kelas . ' - ' . $mataPelajaran->nama_pelajaran . ' - Jam ' . $request->jam_ke)
 
 @section('content')
 <div class="container-fluid">
@@ -15,7 +15,8 @@
                             <h1 class="h2 mb-0 fw-bold">Absensi Siswa</h1>
                             <p class="text-muted mb-0">
                                 <i class="fas fa-school me-1"></i>{{ $kelas->nama_kelas }} -
-                                <i class="fas fa-book me-1"></i>{{ $mataPelajaran->nama_pelajaran }}
+                                <i class="fas fa-book me-1"></i>{{ $mataPelajaran->nama_pelajaran }} -
+                                <i class="fas fa-clock me-1"></i>Jam ke-{{ $request->jam_ke }}
                             </p>
                         </div>
                     </div>
@@ -123,6 +124,7 @@
                         <form action="{{ route('guru.absensi.store') }}" method="post" id="absensi-form">
                             @csrf
                             <input type="hidden" name="mata_pelajaran_id" value="{{ $mataPelajaran->id }}">
+                            <input type="hidden" name="jam_ke" value="{{ $request->jam_ke }}">
 
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0" id="absensi-table">

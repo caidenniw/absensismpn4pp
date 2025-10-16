@@ -102,12 +102,19 @@
 
                     <!-- Add Subject -->
                     <div class="action-item mb-3">
-                        <form action="{{ route('admin.matapelajaran.store') }}" method="post" class="d-flex gap-2">
+                        <form action="{{ route('admin.matapelajaran.store') }}" method="post" class="row g-2">
                             @csrf
-                            <input type="text" name="nama_pelajaran" class="form-control" placeholder="Mata Pelajaran Baru" required>
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-plus"></i>
-                            </button>
+                            <div class="col-4">
+                                <input type="text" name="kode" class="form-control form-control-sm" placeholder="Kode" required>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" name="nama_pelajaran" class="form-control form-control-sm" placeholder="Mata Pelajaran Baru" required>
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-success btn-sm w-100">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
                         </form>
                     </div>
 
@@ -158,15 +165,6 @@
                                 <option selected disabled>Pilih Kelas</option>
                                 @foreach($kelas as $k)
                                     <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Mata Pelajaran</label>
-                            <select name="mata_pelajaran_id" class="form-select form-select-sm" required>
-                                <option selected disabled>Pilih Mata Pelajaran</option>
-                                @foreach($mataPelajaran as $mp)
-                                    <option value="{{ $mp->id }}">{{ $mp->nama_pelajaran }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -239,29 +237,29 @@
                         </div>
 
                         <div class="tab-pane fade" id="matapelajaran" role="tabpanel">
-                            <div class="data-list">
-                                @forelse($mataPelajaran as $mp)
-                                    <div class="data-item d-flex justify-content-between align-items-center">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-book text-success me-3"></i>
-                                            <span class="fw-semibold">{{ $mp->nama_pelajaran }}</span>
-                                        </div>
-                                        <form action="{{ route('admin.matapelajaran.destroy', $mp->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus mata pelajaran ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
+                        <div class="data-list">
+                            @forelse($mataPelajaran as $mp)
+                                <div class="data-item d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-book text-success me-3"></i>
+                                        <span class="fw-semibold">{{ $mp->kode }} - {{ $mp->nama_pelajaran }}</span>
                                     </div>
-                                @empty
-                                    <div class="text-center py-4 text-muted">
-                                        <i class="fas fa-book fa-2x mb-2"></i>
-                                        <p>Belum ada data mata pelajaran</p>
-                                    </div>
-                                @endforelse
-                            </div>
+                                    <form action="{{ route('admin.matapelajaran.destroy', $mp->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus mata pelajaran ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            @empty
+                                <div class="text-center py-4 text-muted">
+                                    <i class="fas fa-book fa-2x mb-2"></i>
+                                    <p>Belum ada data mata pelajaran</p>
+                                </div>
+                            @endforelse
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

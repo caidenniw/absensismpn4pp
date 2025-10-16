@@ -9,7 +9,7 @@ class MataPelajaran extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama_pelajaran'];
+    protected $fillable = ['nama_pelajaran', 'kode'];
 
     public function absensi()
     {

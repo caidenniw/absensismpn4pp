@@ -79,37 +79,48 @@
                     </div>
 
                     <form action="{{ route('guru.absensi.show') }}" method="get" class="absensi-form">
-                        <div class="row g-3">
-                            <div class="col-md-5">
-                                <label class="form-label fw-semibold">
-                                    <i class="fas fa-school me-1 text-primary"></i>Kelas
-                                </label>
-                                <select name="kelas_id" class="form-select form-select-lg" required>
-                                    <option selected disabled>Pilih Kelas</option>
-                                    @foreach($kelas as $k)
-                                    <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-5">
-                                <label class="form-label fw-semibold">
-                                    <i class="fas fa-book me-1 text-success"></i>Mata Pelajaran
-                                </label>
-                                <select name="mata_pelajaran_id" class="form-select form-select-lg" required>
-                                    <option selected disabled>Pilih Mata Pelajaran</option>
-                                    @foreach($mataPelajaran as $mp)
-                                    <option value="{{ $mp->id }}">{{ $mp->nama_pelajaran }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-2 d-grid">
-                                <label class="form-label fw-semibold opacity-0">Action</label>
-                                <button type="submit" class="btn btn-primary btn-lg fw-semibold">
-                                    <i class="fas fa-play me-2"></i>Mulai
-                                </button>
-                            </div>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">
+                                <i class="fas fa-school me-1 text-primary"></i>Kelas
+                            </label>
+                            <select name="kelas_id" class="form-select form-select-lg" required>
+                                <option selected disabled>Pilih Kelas</option>
+                                @foreach($kelas as $k)
+                                <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                    </form>
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">
+                                <i class="fas fa-book me-1 text-success"></i>Mata Pelajaran
+                            </label>
+                            <select name="mata_pelajaran_id" class="form-select form-select-lg" required>
+                                <option selected disabled>Pilih Mata Pelajaran</option>
+                                @foreach($mataPelajaran as $mp)
+                                <option value="{{ $mp->id }}">{{ $mp->nama_pelajaran }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label fw-semibold">
+                                <i class="fas fa-clock me-1 text-warning"></i>Jam Ke
+                            </label>
+                            <select name="jam_ke" class="form-select form-select-lg" required>
+                                <option selected disabled>Pilih Jam</option>
+                                @for($i = 1; $i <= 9; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-2 d-grid">
+                            <label class="form-label fw-semibold opacity-0">Action</label>
+                            <button type="submit" class="btn btn-primary btn-lg fw-semibold">
+                                <i class="fas fa-play me-2"></i>Mulai
+                            </button>
+                        </div>
+                    </div>
+                </form>
 
                     <hr class="my-4">
 

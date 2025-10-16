@@ -193,31 +193,41 @@
             <div class="info-value">{{ $kelas->nama_kelas }}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Mata Pelajaran:</div>
-            <div class="info-value">{{ $mataPelajaran->nama_pelajaran }}</div>
-        </div>
-        <div class="info-row">
             <div class="info-label">Tanggal:</div>
             <div class="info-value">{{ \Carbon\Carbon::parse($request->tanggal)->format('d F Y') }}</div>
-        </div>
-        <div class="info-row">
-            <div class="info-label">Guru Pengampu:</div>
-            <div class="info-value">{{ $absensi->first()->user->name ?? 'N/A' }}</div>
         </div>
     </div>
 
     <!-- Statistics -->
     @php
-    $total = $absensi->count();
-    $hadir = $absensi->where('status', 'hadir')->count();
-    $sakit = $absensi->where('status', 'sakit')->count();
-    $izin = $absensi->where('status', 'izin')->count();
+    $totalSiswa = $siswa->count();
+    $allAbsensi = $absensi->flatten(2);
+
+    // Count unique students by status (latest status per student per day)
+    $studentStats = [];
+    foreach($allAbsensi->groupBy('siswa_id') as $siswaId => $records) {
+        // Get the most recent record for this student
+        $latestRecord = $records->sortByDesc('created_at')->first();
+        $studentStats[$siswaId] = $latestRecord ? $latestRecord->status : null;
+    }
+
+    $hadir = collect($studentStats)->filter(function($status) {
+        return $status === 'hadir';
+    })->count();
+
+    $sakit = collect($studentStats)->filter(function($status) {
+        return $status === 'sakit';
+    })->count();
+
+    $izin = collect($studentStats)->filter(function($status) {
+        return $status === 'izin';
+    })->count();
     @endphp
 
     <div class="stats-section">
         <div class="stats-grid">
             <div class="stats-item">
-                <span class="stats-number">{{ $total }}</span>
+                <span class="stats-number">{{ $totalSiswa }}</span>
                 <span class="stats-label">Total Siswa</span>
             </div>
             <div class="stats-item">
@@ -235,36 +245,90 @@
         </div>
     </div>
 
+    <!-- Daftar Kode Mata Pelajaran -->
+    <div style="margin-bottom: 20px;">
+        <h5 style="margin-bottom: 10px; font-size: 14px;">Daftar Kode Mata Pelajaran:</h5>
+        <table style="width: 100%; border-collapse: collapse; font-size: 10px;">
+            <thead>
+                <tr style="background-color: #f0f0f0;">
+                    <th style="border: 1px solid #000; padding: 4px; text-align: center; width: 15%;">Kode</th>
+                    <th style="border: 1px solid #000; padding: 4px; text-align: center; width: 35%;">Mata Pelajaran</th>
+                    <th style="border: 1px solid #000; padding: 4px; text-align: center; width: 15%;">Kode</th>
+                    <th style="border: 1px solid #000; padding: 4px; text-align: center; width: 35%;">Mata Pelajaran</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                    $mataPelajaranChunks = $mataPelajaran->chunk(2);
+                @endphp
+                @foreach($mataPelajaranChunks as $chunk)
+                <tr>
+                    @foreach($chunk as $mp)
+                    <td style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">{{ $mp->kode }}</td>
+                    <td style="border: 1px solid #000; padding: 4px;">{{ $mp->nama_pelajaran }}</td>
+                    @endforeach
+                    @if($chunk->count() == 1)
+                    <td style="border: 1px solid #000; padding: 4px;"></td>
+                    <td style="border: 1px solid #000; padding: 4px;"></td>
+                    @endif
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
     <!-- Data Table -->
     <table>
         <thead>
             <tr>
                 <th style="width: 5%;">No</th>
-                <th style="width: 30%;">Nama Siswa</th>
-                <th style="width: 15%;">NIS</th>
-                <th style="width: 15%;">NISN</th>
-                <th style="width: 15%;">Keterangan</th>
-                <th style="width: 20%;">Paraf</th>
+                <th style="width: 25%;">Nama Siswa</th>
+                <th style="width: 10%;">Jam 1</th>
+                <th style="width: 10%;">Jam 2</th>
+                <th style="width: 10%;">Jam 3</th>
+                <th style="width: 10%;">Jam 4</th>
+                <th style="width: 10%;">Jam 5</th>
+                <th style="width: 10%;">Jam 6</th>
+                <th style="width: 10%;">Jam 7</th>
+                <th style="width: 10%;">Jam 8</th>
+                <th style="width: 10%;">Jam 9</th>
             </tr>
         </thead>
         <tbody>
-            @forelse($absensi as $index => $absen)
+            @forelse($siswa as $index => $s)
             <tr>
                 <td class="text-center">{{ $index + 1 }}</td>
-                <td>{{ $absen->siswa->nama_siswa }}</td>
-                <td class="text-center">{{ $absen->siswa->nis }}</td>
-                <td class="text-center">{{ $absen->siswa->nisn }}</td>
+                <td>{{ $s->nama_siswa }}</td>
+                @for($jam = 1; $jam <= 9; $jam++)
                 <td class="text-center">
-                    <span class="status-{{ $absen->status }}">
-                        {{ ucfirst($absen->status) }}
-                    </span>
+                    @php
+                        $studentAbsensi = $absensi->get($s->id, collect());
+                        $jamAbsensi = $studentAbsensi->get($jam, collect())->first();
+                    @endphp
+                    @if($jamAbsensi)
+                        <div style="font-size: 8px; margin-bottom: 2px; font-weight: bold;">
+                            {{ strtoupper($jamAbsensi->mataPelajaran->kode) }}
+                        </div>
+                        <div style="font-size: 8px; padding: 1px 3px; border-radius: 2px; display: inline-block;
+                            @if($jamAbsensi->status == 'hadir')
+                                background-color: #d4edda; color: #155724;
+                            @elseif($jamAbsensi->status == 'sakit')
+                                background-color: #fff3cd; color: #856404;
+                            @elseif($jamAbsensi->status == 'izin')
+                                background-color: #d1ecf1; color: #0c5460;
+                            @endif">
+                            {{ ucfirst($jamAbsensi->status) }}
+                        </div>
+                    @else
+                        -
+                    @endif
                 </td>
-                <td class="text-center"></td>
+                @endfor
             </tr>
             @empty
             <tr>
-                <td colspan="6" class="no-data">
-                    Tidak ada data absensi untuk tanggal ini.
+                <td colspan="11" class="no-data">
+                    Tidak ada siswa di kelas ini.
                 </td>
             </tr>
             @endforelse
@@ -283,7 +347,12 @@
         <div class="signature-box">
             <div class="signature-line"></div>
             <div>Guru Pengampu</div>
-            <div style="margin-top: 40px;">{{ $absensi->first()->user->name ?? 'N/A' }}</div>
+            <div style="margin-top: 40px;">
+                @php
+                    $firstAbsensi = $absensi->flatten(2)->first();
+                    echo $firstAbsensi ? $firstAbsensi->user->name : 'N/A';
+                @endphp
+            </div>
         </div>
         <div class="signature-box">
             <div class="signature-line"></div>
