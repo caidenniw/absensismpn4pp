@@ -63,8 +63,8 @@ class AdminController extends Controller
     {
         $request->validate([
             'nama_siswa' => 'required|string|max:255',
-            'nis' => 'required|integer',
-            'nisn' => 'required|integer',
+            'nis' => 'required|string|max:20|unique:siswas,nis',
+            'nisn' => 'required|string|max:20|unique:siswas,nisn',
             'kelas_id' => 'required|exists:kelas,id',
         ]);
         Siswa::create([
@@ -150,8 +150,8 @@ try {
 
         $request->validate([
             'nama_siswa' => 'required|string|max:255',
-            'nis' => 'required|integer|unique:siswas,nis,' . $siswa->id,
-            'nisn' => 'required|integer|unique:siswas,nisn,' . $siswa->id,
+            'nis' => 'required|string|max:20|unique:siswas,nis,' . $siswa->id,
+            'nisn' => 'required|string|max:20|unique:siswas,nisn,' . $siswa->id,
             'kelas_id' => 'required|exists:kelas,id',
         ]);
 
