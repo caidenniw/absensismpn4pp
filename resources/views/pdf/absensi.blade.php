@@ -181,8 +181,8 @@
     <!-- Header -->
     <div class="header">
         <div class="school-name">SEKOLAH MENENGAH PERTAMA NEGERI 4 PADANG PANJANG</div>
-        <div class="school-address">Jl. Pendidikan No. 123, Kota Pendidikan, Indonesia 12345</div>
-        <div class="school-address">Telp: (021) 12345678 | Email: info@smpn4.sch.id</div>
+        <div class="school-address">Jl. Hos. Cokroaminoto No.Rt 01, Silaing Atas, Kec. Padang Panjang Bar., Kota Padang Panjang, Sumatera Barat 27118</div>
+        <div class="school-address">Telp: 075282029 | Email: smpn4padangpanjang@gmail.com</div>
         <div class="report-title">LAPORAN ABSENSI SISWA</div>
     </div>
 
@@ -206,21 +206,21 @@
     // Count unique students by status (latest status per student per day)
     $studentStats = [];
     foreach($allAbsensi->groupBy('siswa_id') as $siswaId => $records) {
-        // Get the most recent record for this student
-        $latestRecord = $records->sortByDesc('created_at')->first();
-        $studentStats[$siswaId] = $latestRecord ? $latestRecord->status : null;
+    // Get the most recent record for this student
+    $latestRecord = $records->sortByDesc('created_at')->first();
+    $studentStats[$siswaId] = $latestRecord ? $latestRecord->status : null;
     }
 
     $hadir = collect($studentStats)->filter(function($status) {
-        return $status === 'hadir';
+    return $status === 'hadir';
     })->count();
 
     $sakit = collect($studentStats)->filter(function($status) {
-        return $status === 'sakit';
+    return $status === 'sakit';
     })->count();
 
     $izin = collect($studentStats)->filter(function($status) {
-        return $status === 'izin';
+    return $status === 'izin';
     })->count();
     @endphp
 
@@ -259,7 +259,7 @@
             </thead>
             <tbody>
                 @php
-                    $mataPelajaranChunks = $mataPelajaran->chunk(2);
+                $mataPelajaranChunks = $mataPelajaran->chunk(2);
                 @endphp
                 @foreach($mataPelajaranChunks as $chunk)
                 <tr>
@@ -300,16 +300,16 @@
                 <td class="text-center">{{ $index + 1 }}</td>
                 <td>{{ $s->nama_siswa }}</td>
                 @for($jam = 1; $jam <= 9; $jam++)
-                <td class="text-center">
+                    <td class="text-center">
                     @php
-                        $studentAbsensi = $absensi->get($s->id, collect());
-                        $jamAbsensi = $studentAbsensi->get($jam, collect())->first();
+                    $studentAbsensi = $absensi->get($s->id, collect());
+                    $jamAbsensi = $studentAbsensi->get($jam, collect())->first();
                     @endphp
                     @if($jamAbsensi)
-                        <div style="font-size: 8px; margin-bottom: 2px; font-weight: bold;">
-                            {{ strtoupper($jamAbsensi->mataPelajaran->kode) }}
-                        </div>
-                        <div style="font-size: 8px; padding: 1px 3px; border-radius: 2px; display: inline-block;
+                    <div style="font-size: 8px; margin-bottom: 2px; font-weight: bold;">
+                        {{ strtoupper($jamAbsensi->mataPelajaran->kode) }}
+                    </div>
+                    <div style="font-size: 8px; padding: 1px 3px; border-radius: 2px; display: inline-block;
                             @if($jamAbsensi->status == 'hadir')
                                 background-color: #d4edda; color: #155724;
                             @elseif($jamAbsensi->status == 'sakit')
@@ -317,13 +317,13 @@
                             @elseif($jamAbsensi->status == 'izin')
                                 background-color: #d1ecf1; color: #0c5460;
                             @endif">
-                            {{ ucfirst($jamAbsensi->status) }}
-                        </div>
+                        {{ ucfirst($jamAbsensi->status) }}
+                    </div>
                     @else
-                        -
+                    -
                     @endif
-                </td>
-                @endfor
+                    </td>
+                    @endfor
             </tr>
             @empty
             <tr>
@@ -349,8 +349,8 @@
             <div>Guru Pengampu</div>
             <div style="margin-top: 40px;">
                 @php
-                    $firstAbsensi = $absensi->flatten(2)->first();
-                    echo $firstAbsensi ? $firstAbsensi->user->name : 'N/A';
+                $firstAbsensi = $absensi->flatten(2)->first();
+                echo $firstAbsensi ? $firstAbsensi->user->name : 'N/A';
                 @endphp
             </div>
         </div>
