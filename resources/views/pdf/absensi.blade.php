@@ -309,14 +309,7 @@
                     <div style="font-size: 8px; margin-bottom: 2px; font-weight: bold;">
                         {{ strtoupper($jamAbsensi->mataPelajaran->kode) }}
                     </div>
-                    <div style="font-size: 8px; padding: 1px 3px; border-radius: 2px; display: inline-block;
-                            @if($jamAbsensi->status == 'hadir')
-                                background-color: #d4edda; color: #155724;
-                            @elseif($jamAbsensi->status == 'sakit')
-                                background-color: #fff3cd; color: #856404;
-                            @elseif($jamAbsensi->status == 'izin')
-                                background-color: #d1ecf1; color: #0c5460;
-                            @endif">
+                    <div class="status-{{ $jamAbsensi->status }}" style="font-size: 8px; padding: 1px 3px; border-radius: 2px; display: inline-block; font-weight: bold;">
                         {{ ucfirst($jamAbsensi->status) }}
                     </div>
                     @else
