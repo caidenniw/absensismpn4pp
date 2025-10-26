@@ -47,7 +47,7 @@ class GuruController extends Controller
     {
         $request->validate([
             'absensi' => 'required|array',
-            'absensi.*' => 'in:hadir,sakit,izin',
+            'absensi.*' => 'in:hadir,sakit,izin,alpa,cabut',
             'mata_pelajaran_id' => 'required|exists:mata_pelajarans,id',
             'jam_ke' => 'required|integer|min:1|max:9',
         ]);

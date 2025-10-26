@@ -31,7 +31,7 @@ class PdfController extends Controller
             ->whereHas('siswa', function ($query) use ($request) {
                 $query->where('kelas_id', $request->kelas_id);
             })
-            ->whereDate('tanggal', $request->tanggal)
+            ->where('tanggal', $request->tanggal)
             ->get()
             ->groupBy(['siswa_id', 'jam_ke']);
 

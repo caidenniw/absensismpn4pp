@@ -170,7 +170,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label small fw-semibold">Tanggal</label>
-                            <input type="date" name="tanggal" class="form-control form-control-sm" required>
+                            <input type="date" name="tanggal" class="form-control form-control-sm" value="{{ date('Y-m-d') }}" required>
                         </div>
                         <button type="submit" class="btn btn-success w-100">
                             <i class="fas fa-download me-2"></i>Unduh Laporan

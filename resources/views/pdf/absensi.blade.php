@@ -69,6 +69,7 @@
         .stats-grid {
             display: table;
             width: 100%;
+            table-layout: fixed;
         }
 
         .stats-item {
@@ -133,6 +134,22 @@
         .status-izin {
             background-color: #d1ecf1;
             color: #0c5460;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .status-alpa {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .status-cabut {
+            background-color: #e2e3e5;
+            color: #383d41;
             padding: 2px 6px;
             border-radius: 3px;
             font-weight: bold;
@@ -222,6 +239,14 @@
     $izin = collect($studentStats)->filter(function($status) {
     return $status === 'izin';
     })->count();
+
+    $alpa = collect($studentStats)->filter(function($status) {
+    return $status === 'alpa';
+    })->count();
+
+    $cabut = collect($studentStats)->filter(function($status) {
+    return $status === 'cabut';
+    })->count();
     @endphp
 
     <div class="stats-section">
@@ -241,6 +266,14 @@
             <div class="stats-item">
                 <span class="stats-number">{{ $izin }}</span>
                 <span class="stats-label">Izin</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-number">{{ $alpa }}</span>
+                <span class="stats-label">Alpa</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-number">{{ $cabut }}</span>
+                <span class="stats-label">Cabut</span>
             </div>
         </div>
     </div>

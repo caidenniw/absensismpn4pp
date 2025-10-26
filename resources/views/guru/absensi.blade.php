@@ -92,6 +92,24 @@
                             <span class="stat-label">Izin</span>
                         </div>
                     </div>
+                    <div class="stat-item">
+                        <div class="stat-icon bg-danger">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="stat-text">
+                            <span class="stat-number" id="alpa-count">0</span>
+                            <span class="stat-label">Alpa</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon bg-secondary">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="stat-text">
+                            <span class="stat-number" id="cabut-count">0</span>
+                            <span class="stat-label">Cabut</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -148,6 +166,12 @@
                                             <th class="text-center">
                                                 <i class="fas fa-envelope-open-text text-info me-2"></i>Izin
                                             </th>
+                                            <th class="text-center">
+                                                <i class="fas fa-times text-danger me-2"></i>Alpa
+                                            </th>
+                                            <th class="text-center">
+                                                <i class="fas fa-sign-out-alt text-secondary me-2"></i>Cabut
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -183,6 +207,18 @@
                                                        name="absensi[{{ $s->id }}]" value="izin"
                                                        {{ isset($existingAbsensi[$s->id]) && $existingAbsensi[$s->id]->status == 'izin' ? 'checked' : '' }}
                                                        data-status="izin" data-student="{{ $s->id }}">
+                                            </td>
+                                            <td class="text-center">
+                                                <input class="form-check-input attendance-radio" type="radio"
+                                                       name="absensi[{{ $s->id }}]" value="alpa"
+                                                       {{ isset($existingAbsensi[$s->id]) && $existingAbsensi[$s->id]->status == 'alpa' ? 'checked' : '' }}
+                                                       data-status="alpa" data-student="{{ $s->id }}">
+                                            </td>
+                                            <td class="text-center">
+                                                <input class="form-check-input attendance-radio" type="radio"
+                                                       name="absensi[{{ $s->id }}]" value="cabut"
+                                                       {{ isset($existingAbsensi[$s->id]) && $existingAbsensi[$s->id]->status == 'cabut' ? 'checked' : '' }}
+                                                       data-status="cabut" data-student="{{ $s->id }}">
                                             </td>
                                         </tr>
                                         @endforeach
@@ -251,44 +287,50 @@
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
 }
 
 .stat-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 0.75rem;
+    justify-content: center;
+    padding: 0.75rem 0.5rem;
     background: #f8f9fa;
     border-radius: 0.5rem;
 }
 
 .stat-icon {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    margin-right: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
 }
 
 .stat-text {
     text-align: center;
+    width: 100%;
 }
 
 .stat-number {
     display: block;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #333;
+    margin-bottom: 0.25rem;
 }
 
 .stat-label {
     display: block;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #666;
+    font-weight: 500;
 }
 
 .progress-card {
@@ -393,14 +435,14 @@
 }
 
 @media (max-width: 768px) {
-    .absensi-header {
-        padding: 1.5rem;
-    }
+.absensi-header {
+    padding: 1.5rem;
+}
 
-    .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-    }
+.stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
 
     .student-info {
         flex-direction: column;
@@ -429,6 +471,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const hadirCount = document.getElementById('hadir-count');
     const sakitCount = document.getElementById('sakit-count');
     const izinCount = document.getElementById('izin-count');
+    const alpaCount = document.getElementById('alpa-count');
+    const cabutCount = document.getElementById('cabut-count');
     const progressBar = document.getElementById('progress-bar');
     const progressText = document.getElementById('progress-text');
     const absensiCard = document.querySelector('.absensi-card');
@@ -436,23 +480,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const absensiForm = document.getElementById('absensi-form');
 
     function updateStats() {
-        let hadir = 0, sakit = 0, izin = 0;
+        let hadir = 0, sakit = 0, izin = 0, alpa = 0, cabut = 0;
 
         attendanceRadios.forEach(radio => {
             if (radio.checked) {
                 if (radio.dataset.status === 'hadir') hadir++;
                 else if (radio.dataset.status === 'sakit') sakit++;
                 else if (radio.dataset.status === 'izin') izin++;
+                else if (radio.dataset.status === 'alpa') alpa++;
+                else if (radio.dataset.status === 'cabut') cabut++;
             }
         });
 
         hadirCount.textContent = hadir;
         sakitCount.textContent = sakit;
         izinCount.textContent = izin;
+        alpaCount.textContent = alpa;
+        cabutCount.textContent = cabut;
 
-        const progress = ((hadir + sakit + izin) / totalStudents) * 100;
+        const progress = ((hadir + sakit + izin + alpa + cabut) / totalStudents) * 100;
         progressBar.style.width = progress + '%';
-        progressText.textContent = (hadir + sakit + izin) + ' dari ' + totalStudents + ' siswa';
+        progressText.textContent = (hadir + sakit + izin + alpa + cabut) + ' dari ' + totalStudents + ' siswa';
     }
 
     attendanceRadios.forEach(radio => {
